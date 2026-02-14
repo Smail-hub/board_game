@@ -26,9 +26,13 @@ letters_mapping = {'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
                   'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
                   ' ': ' '}
 
-skill_1 = ("Стремительный прыжок")
-print(skill_1)
+#char = "р"
+#letter_t = letters_mapping[char]
 
-for skill in skill_1:
-    print(skill)
+#print(letter_t)
 
+skill = "Стремительный прыжок"
+
+for letter in skill:
+    Letters = letters_mapping[letter]
+    print(Letters)
