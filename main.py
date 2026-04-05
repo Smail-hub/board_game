@@ -60,8 +60,5 @@ for number in range(1, 11):
         "skill_3": rune_skills[2],
     }
 
-    output_file = "result_{}.svg".format(number)
-    file_operations.render_template(
-        "charsheet.svg",
-        "result_cards/result_1.svg",
-        context)
+    output_file = "results/result_{}.svg".format(number)
+    file_operations.render_template("charsheet.svg", output_file, context)
