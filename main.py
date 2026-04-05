@@ -1,18 +1,13 @@
+import os
 import file_operations
 import random
 from faker import Faker
 
 fake = Faker("ru_RU")
-fake.last_name_female()
-fake.first_name_female()
-fake.city()
-fake.job()
 
 skills = ["Стремительный прыжок", "Электрический выстрел", "Ледяной удар",
           "Стремительный удар", "Кислотный взгляд", "Тайный побег",
           "Ледяной выстрел", "Огненный заряд"]
-
-skills_3 = random.sample(skills, 3)
 
 letters_mapping = {'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
                   'г': 'г͒͠', 'д': 'д̋', 'е': 'е͠',
@@ -38,20 +33,35 @@ letters_mapping = {'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
                   'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
                   ' ': ' '}
 
+os.makedirs("results", exist_ok=True)
 
-context = {
-  "first_name": fake.first_name_female(),
-  "last_name": fake.last_name_female(),
-  "town": fake.city(),
-  "job": fake.job(),
-  "strength": random.randint(3, 18),
-  "agility": random.randint(3, 18),
-  "endurance": random.randint(3, 18),
-  "intelligence": random.randint(3, 18),
-  "luck": random.randint(3, 18),
-  "skill_1": skills_3[0].replace("е", "е͠"),
-  "skill_2": skills_3[1].replace("е", "е͠"),
-  "skill_3": skills_3[2].replace("е", "е͠"),
-}
+for number in range(1, 11):
+    skills_3 = random.sample(skills, 3)
 
-file_operations.render_template("charsheet.svg", "result.svg", context)
+    rune_skills = []
+    for skill in skills_3:
+        result = skill
+        for letter, rune in letters_mapping.items():
+            result = result.replace(letter, rune)
+        rune_skills.append(result)
+
+    context = {
+        "first_name": fake.first_name_female(),
+        "last_name": fake.last_name_female(),
+        "town": fake.city(),
+        "job": fake.job(),
+        "strength": random.randint(3, 18),
+        "agility": random.randint(3, 18),
+        "endurance": random.randint(3, 18),
+        "intelligence": random.randint(3, 18),
+        "luck": random.randint(3, 18),
+        "skill_1": rune_skills[0],
+        "skill_2": rune_skills[1],
+        "skill_3": rune_skills[2],
+    }
+
+    output_file = "result_{}.svg".format(number)
+    file_operations.render_template(
+        "charsheet.svg",
+        "result_cards/result_1.svg",
+        context)

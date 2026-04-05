@@ -26,13 +26,11 @@ letters_mapping = {'а': 'а͠', 'б': 'б̋', 'в': 'в͒͠',
                   'Э': 'Э͒͠͠', 'Ю': 'Ю̋͠', 'Я': 'Я̋',
                   ' ': ' '}
 
-#char = "р"
-#letter_t = letters_mapping[char]
-
-#print(letter_t)
 
 skill = "Стремительный прыжок"
 
-for letter in skill:
-    Letters = letters_mapping[letter]
-    print(Letters)
+
+result = skill
+for letter, rune in letters_mapping.items():
+    result = result.replace(letter, rune)
+print(result)
