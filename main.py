@@ -3,9 +3,9 @@ import file_operations
 import random
 from faker import Faker
 
-fake = Faker("ru_RU")
+faker = Faker("ru_RU")
 
-skills = [
+SKILLS = [
     "Стремительный прыжок",
     "Электрический выстрел",
     "Ледяной удар",
@@ -16,7 +16,7 @@ skills = [
     "Огненный заряд",
 ]
 
-letters_mapping = {
+LETTERS_MAPPING = {
     "а": "а͠",
     "б": "б̋",
     "в": "в͒͠",
@@ -91,20 +91,20 @@ def go_to_work():
     os.makedirs("results", exist_ok=True)
 
     for number in range(1, 11):
-        skills_3 = random.sample(skills, 3)
+        skills_3 = random.sample(SKILLS, 3)
 
         rune_skills = []
         for skill in skills_3:
             result = skill
-            for letter, rune in letters_mapping.items():
+            for letter, rune in LETTERS_MAPPING.items():
                 result = result.replace(letter, rune)
             rune_skills.append(result)
 
         context = {
-            "first_name": fake.first_name_female(),
-            "last_name": fake.last_name_female(),
-            "town": fake.city(),
-            "job": fake.job(),
+            "first_name": faker.first_name_female(),
+            "last_name": faker.last_name_female(),
+            "town": faker.city(),
+            "job": faker.job(),
             "strength": random.randint(3, 18),
             "agility": random.randint(3, 18),
             "endurance": random.randint(3, 18),
