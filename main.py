@@ -3,7 +3,6 @@ import file_operations
 import random
 from faker import Faker
 
-faker = Faker("ru_RU")
 
 SKILLS = [
     "Стремительный прыжок",
@@ -87,7 +86,8 @@ LETTERS_MAPPING = {
 }
 
 
-def go_to_work():
+def main():
+    faker = Faker("ru_RU")
     os.makedirs("results", exist_ok=True)
 
     for number in range(1, 11):
@@ -120,4 +120,4 @@ def go_to_work():
 
 
 if __name__ == "__main__":
-    go_to_work()
+    main()
